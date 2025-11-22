@@ -6,6 +6,14 @@ dbfile=open('coronamodel.pickle','rb')
 model=pickle.load(dbfile)
 
 st.title("Corona Prediction")
+import os
+import pickle
+if os.path.exists('coronamodel.pickle'):
+    with open('coronamodel.pickle', 'rb') as dbfile:
+        model = pickle.load(dbfile)
+else:
+    st.error("Model file not found!")
+
 
 cs=st.radio("Do you have cough symptoms:",["Yes","No"])
 f=st.radio("Do you have Fever:",["Yes","No"])
@@ -16,7 +24,7 @@ age=st.radio("Do you have Age_60_above:",["Yes","No"])
 sex=st.radio("Enter your gender:",["Male","Female"])
 cwc=st.radio("attached with:",["abroad","other","contact_with_conform"])
 
-if st.button("Prediction"):
+if st.button("Predict"):
 	if cs=="Yes":
 		Cough_symptoms=1
 	else:
